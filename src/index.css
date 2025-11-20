@@ -1,0 +1,76 @@
+:root {
+    /* Tonos base claros */
+    --base-50: #f9fafb;
+    --base-100: #f3f4f6;
+    --base-200: #e5e7eb;
+    --base-900: #111827;
+    --text: #1f2937;
+    --muted: #6b7280;
+
+    /* Acentos modernos */
+    --accent-500: #6366f1; /* Indigo */
+    --accent-600: #4f46e5;
+    --accent-700: #4338ca;
+    --accent-gradient: linear-gradient(135deg, var(--accent-600), var(--accent-700));
+
+    /* Estados */
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+
+    /* Sombras suaves */
+    --shadow-1: 0 4px 14px rgba(0,0,0,0.05);
+    --shadow-2: 0 8px 26px rgba(0,0,0,0.08);
+
+    /* Formas y transición */
+    --radius: 12px;
+    --radius-sm: 8px;
+    --gap: 12px;
+    --transition-fast: 180ms;
+    --transition-medium: 260ms;
+    --font-sans: Inter, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Fondo general */
+html, body, #root {
+    height: 100%;
+    background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+    font-family: var(--font-sans), serif;
+    color: var(--text);
+}
+
+.btn-primary {
+    background: var(--accent-gradient);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(99,102,241,0.15);
+}
+
+.btn-primary:hover {
+    filter: brightness(1.05);
+    box-shadow: 0 8px 24px rgba(79,70,229,0.2);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--accent-500);
+    color: var(--accent-600);
+}
+
+input[type="text"],
+input[type="password"] {
+    border: 1px solid var(--base-200);
+    background: #fff;
+    transition: all var(--transition-fast);
+}
+
+input:focus {
+    border-color: var(--accent-500);
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+.card {
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-1);
+    border: 1px solid var(--base-200);
+}

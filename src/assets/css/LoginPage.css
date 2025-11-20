@@ -1,0 +1,93 @@
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    background: var(--base-100);
+}
+
+/* Imagen lateral */
+.login-illustration {
+    flex: 1;
+    background: url("/src/assets/login-bg.jpg") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.login-illustration::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.7), rgba(67, 56, 202, 0.5));
+}
+
+/* Texto superpuesto */
+.login-illustration .overlay {
+    color: white;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+}
+
+.login-illustration h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+}
+
+.login-illustration p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Área del formulario */
+.login-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow-2);
+    padding: 2rem 2.5rem;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Animación sutil */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsivo */
+@media (max-width: 860px) {
+    .login-page {
+        flex-direction: column;
+    }
+
+    .login-illustration {
+        height: 180px;
+    }
+
+    .login-illustration .overlay h1 {
+        font-size: 1.8rem;
+    }
+
+    .login-content {
+        padding: 1.5rem;
+    }
+}

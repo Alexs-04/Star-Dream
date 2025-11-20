@@ -1,0 +1,81 @@
+/* Página */
+.settings-page {
+    padding: 20px;
+}
+
+.settings-page h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Sección */
+.settings-section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.settings-section h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Toggle */
+.settings-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    cursor: pointer;
+    position: relative;
+}
+
+.settings-toggle input {
+    display: none;
+}
+
+.settings-toggle .slider {
+    width: 45px;
+    height: 24px;
+    background: #d1d5db;
+    border-radius: 999px;
+    position: relative;
+    transition: .2s;
+}
+
+.settings-toggle .slider::after {
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: .2s;
+}
+
+.settings-toggle input:checked + .slider {
+    background: #6366f1;
+}
+
+.settings-toggle input:checked + .slider::after {
+    transform: translateX(21px);
+}
+
+/* Select */
+.settings-select {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.settings-select select {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    outline: none;
+}

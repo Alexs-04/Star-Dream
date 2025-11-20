@@ -1,0 +1,65 @@
+.layout {
+    display: flex;
+    height: 100vh;
+    background: var(--background);
+    color: var(--text);
+}
+
+.sidebar {
+    width: 240px;
+    background: var(--card);
+    padding: 20px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    margin-bottom: 40px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.sidebar nav a {
+    display: block;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    transition: background 0.2s;
+}
+
+.sidebar nav a:hover {
+    background: var(--hover);
+}
+
+.sidebar nav a.active {
+    background: var(--primary);
+    color: white;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    padding: 15px 25px;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+}
+
+.page-content {
+    padding: 25px;
+}
+
+.theme-select {
+    margin-left: auto;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+}

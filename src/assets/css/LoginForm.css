@@ -1,0 +1,131 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+/* --- Cabecera --- */
+.login-header {
+    text-align: center;
+}
+
+.login-header .login-logo {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #6366f1, #4338ca);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 1.3rem;
+    margin: 0 auto 10px;
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.25);
+}
+
+.login-container h2 {
+    color: #1e1e1e;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.login-sub {
+    color: #6b6b6b;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+/* --- Formulario --- */
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.login-container label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Inputs */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #fff;
+    font-size: 15px;
+    transition: 0.25s;
+}
+
+.login-container input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* --- Botón principal --- */
+.login-container button[type="submit"] {
+    background: linear-gradient(135deg, #6366f1, #4338ca);
+    color: #fff;
+    border: none;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.25);
+    transition: all 0.25s ease;
+}
+
+.login-container button[type="submit"]:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 10px 24px rgba(99, 102, 241, 0.3);
+}
+
+.login-container button[type="submit"]:active {
+    transform: translateY(1px);
+}
+
+/* --- Error --- */
+.login-container .error {
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.06);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+/* --- Links o acciones secundarias --- */
+.login-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+}
+
+.login-actions a {
+    color: #4338ca;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-actions a:hover {
+    text-decoration: underline;
+}
+
+/* --- Responsivo --- */
+@media (max-width: 480px) {
+    .login-container {
+        gap: 12px;
+    }
+    .login-container button {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+}
