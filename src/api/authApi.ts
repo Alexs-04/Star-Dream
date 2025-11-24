@@ -1,4 +1,6 @@
 // src/api/authApi.ts
+import api from "./axiosClient";
+
 export interface LoginRequest {
     username: string;
     password: string;
@@ -7,19 +9,48 @@ export interface LoginRequest {
 export interface LoginResponse {
     username: string;
     role: string;
-    token: string;
+    accessToken: string;
+    refreshToken: string;
 }
 
 export async function loginUser(request: LoginRequest): Promise<LoginResponse> {
-    const response = await fetch("http://localhost:8080/api/auth/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(request),
-    });
+    console.log("=== LLAMANDO API LOGIN ===");
 
-    if (!response.ok) throw new Error("Credenciales inválidas");
+    try {
+        const response = await api.post("/api/auth/login", request);
 
-    return response.json();
+        console.log("=== RESPUESTA DEL SERVIDOR ===");
+        console.log("Status:", response.status);
+        console.log("Datos completos:", response.data);
+
+        // Valida que la respuesta tenga la estructura correcta
+        if (!response.data.accessToken) {
+            throw new Error("No se recibió accessToken en la respuesta");
+        }
+
+        if (!response.data.refreshToken) {
+            throw new Error("No se recibió refreshToken en la respuesta");
+        }
+
+        if (response.data.accessToken === 'null' || response.data.accessToken === 'undefined') {
+            throw new Error("AccessToken es null o undefined");
+        }
+
+        console.log("AccessToken válido, longitud:", response.data.accessToken.length);
+        console.log("RefreshToken válido, longitud:", response.data.refreshToken.length);
+
+        return response.data;
+    } catch (error: any) {
+        console.error("=== ERROR EN API CALL ===");
+        if (error.response) {
+            console.error("Data del error:", error.response.data);
+            console.error("Status del error:", error.response.status);
+            console.error("Headers del error:", error.response.headers);
+        } else if (error.request) {
+            console.error("No se recibió respuesta:", error.request);
+        } else {
+            console.error("Error configurando request:", error.message);
+        }
+        throw error;
+    }
 }

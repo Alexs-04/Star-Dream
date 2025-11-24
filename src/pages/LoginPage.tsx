@@ -1,10 +1,18 @@
-import React from "react";
+//src/pages/LoginPage.tsx
+import React, {useEffect} from "react";
 import LoginForm from "../components/LoginForm";
 import "../assets/css/LoginPage.css";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
+// src/pages/LoginPage.tsx
 const LoginPage: React.FC = () => {
     const navigate = useNavigate();
+
+    // Limpia tokens antiguos al cargar la página de login
+    useEffect(() => {
+        localStorage.clear();
+        console.log("LocalStorage limpiado al cargar LoginPage");
+    }, []);
 
     return (
         <div className="login-page">
@@ -18,13 +26,33 @@ const LoginPage: React.FC = () => {
             <div className="login-content">
                 <div className="login-card">
                     <LoginForm
-                        onLoginSuccess={(username, role, token) => {
-                            console.log("Usuario autenticado:", username, role);
+                        onLoginSuccess={(username, role, accessToken, refreshToken) => {
+                            console.log("=== GUARDANDO TOKENS ===");
+                            console.log("Access Token:", accessToken);
+                            console.log("Refresh Token:", refreshToken);
+                            console.log("Username:", username);
+                            console.log("Role:", role);
 
-                            // Guardar JWT
-                            localStorage.setItem("token", token);
+                            // Verifica que los tokens no sean null/undefined
+                            if (!accessToken || accessToken === 'null' || accessToken === 'undefined') {
+                                console.error("Access Token es inválido:", accessToken);
+                                return;
+                            }
+
+                            if (!refreshToken || refreshToken === 'null' || refreshToken === 'undefined') {
+                                console.error("Refresh Token es inválido:", refreshToken);
+                                return;
+                            }
+
+                            localStorage.setItem("accessToken", accessToken);
+                            localStorage.setItem("refreshToken", refreshToken);
                             localStorage.setItem("username", username);
                             localStorage.setItem("role", role);
+
+                            // Verifica que se guardaron correctamente
+                            console.log("=== TOKENS GUARDADOS ===");
+                            console.log("accessToken en localStorage:", localStorage.getItem("accessToken"));
+                            console.log("refreshToken en localStorage:", localStorage.getItem("refreshToken"));
 
                             navigate("/");
                         }}

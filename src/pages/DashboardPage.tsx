@@ -1,13 +1,13 @@
 // src/pages/DashboardPage.tsx
 import { useEffect, useState } from "react";
 import DashboardGrid from "../components/dashboard/DashboardGrid";
+import api from "../api/axiosClient";
 
 interface DashboardData {
     totalProducts: number;
     salesToday: number;
     totalSuppliers: number;
     totalOrders: number;
-
     monthlySales: { name: string; ventas: number }[];
     purchasesBySupplier: { name: string; total: number }[];
     systemDistribution: { name: string; value: number }[];
@@ -16,22 +16,30 @@ interface DashboardData {
 const DashboardPage = () => {
     const [data, setData] = useState<DashboardData | null>(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchDashboard = async () => {
             try {
-                const token = localStorage.getItem("token");
+                console.log("=== CARGANDO DASHBOARD ===");
 
-                const res = await fetch("http://localhost:8080/api/dashboard/data", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                const response = await api.get("/api/dashboard/data");
 
-                const json = await res.json();
-                setData(json);
-            } catch (err) {
+                console.log("Datos del dashboard recibidos:", response.data);
+                setData(response.data);
+                setError(null);
+
+            } catch (err: any) {
                 console.error("Error cargando dashboard:", err);
+
+                if (err.response?.status === 401) {
+                    setError("Sesión expirada. Redirigiendo al login...");
+                    // El interceptor ya debería redirigir automáticamente
+                } else if (err.response?.status === 403) {
+                    setError("No tienes permisos para ver el dashboard");
+                } else {
+                    setError("Error al cargar los datos del dashboard");
+                }
             } finally {
                 setLoading(false);
             }
@@ -40,8 +48,29 @@ const DashboardPage = () => {
         fetchDashboard();
     }, []);
 
-    if (loading) return <p>Cargando dashboard...</p>;
-    if (!data) return <p>Error al cargar datos.</p>;
+    if (loading) {
+        return (
+            <div className="loading-container">
+                <p>Cargando dashboard...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="error-container">
+                <p>{error}</p>
+            </div>
+        );
+    }
+
+    if (!data) {
+        return (
+            <div className="error-container">
+                <p>No se pudieron cargar los datos del dashboard</p>
+            </div>
+        );
+    }
 
     return <DashboardGrid data={data} />;
 };
