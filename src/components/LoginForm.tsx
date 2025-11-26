@@ -4,8 +4,14 @@ import {loginUser} from "../api/authApi";
 import "../assets/css/LoginForm.css";
 
 interface Props {
-    onLoginSuccess: (username: string, role: string, token: string) => void;
+    onLoginSuccess: (
+        username: string,
+        role: string,
+        accessToken: string,
+        refreshToken: string
+    ) => void;
 }
+
 
 
 const LoginForm: React.FC<Props> = ({onLoginSuccess}) => {
@@ -21,7 +27,13 @@ const LoginForm: React.FC<Props> = ({onLoginSuccess}) => {
             const data = await loginUser({ username, password });
 
             // PASAR token también
-            onLoginSuccess(data.username, data.role, data.token);
+            onLoginSuccess(
+                data.username,
+                data.role,
+                data.accessToken,
+                data.refreshToken
+            );
+
 
         } catch {
             setError("Usuario o contraseña incorrectos");
