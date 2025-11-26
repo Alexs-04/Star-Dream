@@ -14,14 +14,9 @@ export interface LoginResponse {
 }
 
 export async function loginUser(request: LoginRequest): Promise<LoginResponse> {
-    console.log("=== LLAMANDO API LOGIN ===");
 
     try {
         const response = await api.post("/api/auth/login", request);
-
-        console.log("=== RESPUESTA DEL SERVIDOR ===");
-        console.log("Status:", response.status);
-        console.log("Datos completos:", response.data);
 
         // Valida que la respuesta tenga la estructura correcta
         if (!response.data.accessToken) {
@@ -36,21 +31,27 @@ export async function loginUser(request: LoginRequest): Promise<LoginResponse> {
             throw new Error("AccessToken es null o undefined");
         }
 
-        console.log("AccessToken válido, longitud:", response.data.accessToken.length);
-        console.log("RefreshToken válido, longitud:", response.data.refreshToken.length);
 
         return response.data;
     } catch (error: any) {
         console.error("=== ERROR EN API CALL ===");
         if (error.response) {
-            console.error("Data del error:", error.response.data);
-            console.error("Status del error:", error.response.status);
-            console.error("Headers del error:", error.response.headers);
         } else if (error.request) {
             console.error("No se recibió respuesta:", error.request);
         } else {
             console.error("Error configurando request:", error.message);
         }
         throw error;
+    }
+}
+
+export async function logoutUser(refreshToken: string): Promise<void> {
+    try {
+        console.log("=== EJECUTANDO LOGOUT ===");
+        const response = await api.post("/api/auth/logout", { refreshToken });
+        console.log("Logout exitoso:", response.data);
+    } catch (error) {
+        console.error("Error en logout:", error);
+        // Aún así limpiamos el frontend aunque falle en el backend
     }
 }

@@ -23,7 +23,6 @@ export const DashboardCharts = ({
                                     purchasesBySupplier = [],
                                     systemDistribution = []
                                 }: Props) => {
-
     // Datos por defecto si vienen vacíos
     const defaultMonthlySales = monthlySales.length > 0 ? monthlySales : [
         { name: 'Sin datos', ventas: 0 }
@@ -37,6 +36,7 @@ export const DashboardCharts = ({
         { name: 'Sin datos', value: 100 }
     ];
 
+    // @ts-ignore
     return (
         <div className="charts-container">
 
@@ -109,6 +109,7 @@ export const DashboardCharts = ({
             </div>
 
             {/* Gráfico de Pie - Distribución del Sistema */}
+
             <div className="chart-card">
                 <h3>Distribución del Sistema</h3>
                 <ResponsiveContainer width="100%" height={260}>

@@ -5,10 +5,11 @@ import Sidebar from "./Sidebar";
 import TopBar from "./TopBar";
 import ProtectedRoute from "../../routes/ProtectedRoute";
 import "../../assets/css/Layout.css";
+import {useLogout} from "../../hooks/useLogout.ts";
 
 const Layout: React.FC = () => {
     console.log("Layout component rendering");
-
+    useLogout();
     return (
         <ProtectedRoute>
             <div className="layout">

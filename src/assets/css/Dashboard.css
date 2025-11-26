@@ -1,42 +1,159 @@
-/* src/assents/css/Dashboard.css */
+/* src/assets/css/Dashboard.css */
+/* Nuevo contenedor para envolver el estado de carga/error */
+.state-full-container {
+    /* Ocupa el 100% del ancho del contenedor del padding */
+    width: 100%;
+    /* Esta línea es clave para ocupar la altura restante de la ventana/layout */
+    min-height: calc(100vh - var(--header-height) - 4rem);
+    /* Ajusta 'var(--header-height)' y '4rem' (padding) según tu layout real */
+
+    display: flex; /* Para centrar loading/error-container */
+    justify-content: center;
+    align-items: center;
+}
 
 .dash-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 18px;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .dash-card {
-    background: #fff;
-    border-radius: 14px;
-    padding: 18px;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
     display: flex;
     align-items: center;
-    gap: 14px;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: 0.25s;
+    gap: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .dash-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .dash-icon {
-    background: #eef2ff;
-    padding: 12px;
-    border-radius: 12px;
-    color: #4338ca;
+    background: #6366f1;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 10px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dash-content {
+    display: flex;
+    flex-direction: column;
 }
 
 .dash-title {
-    font-size: 14px;
-    color: #555;
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
 }
 
 .dash-value {
-    font-size: 20px;
+    font-size: 1.5rem;
     font-weight: 700;
+    color: #1f2937;
+}
+
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.chart-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.chart-card h3 {
+    margin: 0 0 1rem 0;
+    color: #374151;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.loading-container, .error-container {
+    /* Eliminar o comentar la altura fija */
+    /* height: 400px; */
+
+    /* Centrar su contenido internamente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* Darles un tamaño y estilo visual */
+    width: 100%; /* Ocupar el ancho del .state-full-container */
+    max-width: 600px; /* Limita el ancho para un mejor diseño visual */
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.loading-container p {
+    color: #6366f1;
+    font-size: 1.125rem;
+}
+
+.error-container p {
+    color: #ef4444;
+    font-size: 1.125rem;
+}
+
+/* Mejora responsive */
+@media (max-width: 768px) {
+    .dash-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .charts-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .dash-card {
+        padding: 1rem;
+    }
+
+    .chart-card {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dash-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.retry-button {
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    background: var(--accent-500);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.retry-button:hover {
+    background: var(--accent-600);
 }

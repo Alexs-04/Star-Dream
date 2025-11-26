@@ -95,3 +95,21 @@
     margin-bottom: 20px;
     color: #1f1f1f;
 }
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--base-200);
+}
+
+.sidebar-link.logout {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.sidebar-link.logout:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: #dc2626;
+    border-color: rgba(239, 68, 68, 0.3);
+}

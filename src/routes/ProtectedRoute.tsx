@@ -10,12 +10,6 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
         const checkToken = async () => {
             const token = localStorage.getItem("accessToken");
 
-            console.log("=== PROTECTED ROUTE CHECK ===");
-            console.log("Token from localStorage:", token);
-            console.log("Token is 'null':", token === 'null');
-            console.log("Token is 'undefined':", token === 'undefined');
-            console.log("Token exists:", !!token);
-
             if (!token || token === 'null' || token === 'undefined') {
                 console.log("No valid token found, redirecting to login");
                 setIsValid(false);

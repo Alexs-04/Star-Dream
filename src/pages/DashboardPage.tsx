@@ -32,14 +32,16 @@ const DashboardPage = () => {
             } catch (err: any) {
                 console.error("Error cargando dashboard:", err);
 
-                if (err.response?.status === 401) {
-                    setError("Sesión expirada. Redirigiendo al login...");
-                    // El interceptor ya debería redirigir automáticamente
-                } else if (err.response?.status === 403) {
+                // No manejes 401 aquí, el interceptor lo hace
+                if (err.response?.status === 403) {
                     setError("No tienes permisos para ver el dashboard");
-                } else {
+                } else if (err.code === 'NETWORK_ERROR' || !err.response) {
+                    setError("Error de conexión. Verifica tu internet.");
+                } else if (err.response?.status !== 401) {
+                    // Solo muestra error si no es 401 (el interceptor maneja 401)
                     setError("Error al cargar los datos del dashboard");
                 }
+                // Si es 401, el interceptor ya maneja la redirección
             } finally {
                 setLoading(false);
             }
@@ -47,32 +49,59 @@ const DashboardPage = () => {
 
         fetchDashboard();
     }, []);
+    const StateContainer = ({ children }: { children: React.ReactNode }) => (
+        <div style={{ padding: '2rem' }}>
+            {/* Ocupa el 100% del ancho del contenedor principal del layout */}
+            <div className="state-full-container">
+                {children}
+            </div>
+        </div>
+    );
+
 
     if (loading) {
         return (
-            <div className="loading-container">
-                <p>Cargando dashboard...</p>
-            </div>
+            <StateContainer>
+                <div className="loading-container">
+                    <p>Cargando dashboard...</p>
+                </div>
+            </StateContainer>
         );
     }
 
-    if (error) {
+    if (error && !loading) {
         return (
-            <div className="error-container">
-                <p>{error}</p>
-            </div>
+            <StateContainer>
+                <div className="error-container">
+                    <p>{error}</p>
+                    <button
+                        onClick={() => window.location.reload()}
+                        className="retry-button"
+                    >
+                        Reintentar
+                    </button>
+                </div>
+            </StateContainer>
         );
     }
 
-    if (!data) {
+    if (!data && !loading) {
         return (
-            <div className="error-container">
-                <p>No se pudieron cargar los datos del dashboard</p>
-            </div>
+            <StateContainer>
+                <div className="error-container">
+                    <p>No se pudieron cargar los datos del dashboard</p>
+                    <button
+                        onClick={() => window.location.reload()}
+                        className="retry-button"
+                    >
+                        Reintentar
+                    </button>
+                </div>
+            </StateContainer>
         );
     }
 
-    return <DashboardGrid data={data} />;
+    return data ? <DashboardGrid data={data} /> : null;
 };
 
 export default DashboardPage;
