@@ -1,0 +1,97 @@
+/* Agregar al archivo Products.css */
+
+/* Subtítulo de página */
+.page-subtitle {
+    color: var(--muted);
+    margin: 0.25rem 0 0 0;
+    font-size: 0.875rem;
+}
+
+/* Mensaje de advertencia */
+.warning-message {
+    background: #fffbeb;
+    border: 1px solid #f59e0b;
+    color: #92400e;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1rem;
+}
+
+/* Lista de proveedores en tabla */
+.suppliers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.supplier-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--base-50);
+    border-radius: 4px;
+}
+
+.supplier-price {
+    margin-left: auto;
+    font-weight: 600;
+    color: var(--accent-600);
+}
+
+.no-suppliers {
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.875rem;
+}
+
+/* Descripción en tabla */
+.description {
+    color: var(--muted);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Hint en formulario */
+.form-hint {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin: 0.5rem 0 0 0;
+}
+
+.form-hint a {
+    text-decoration: underline;
+}
+
+/* Botón deshabilitado */
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-primary:disabled:hover {
+    filter: none;
+    box-shadow: none;
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+    .supplier-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .supplier-price {
+        margin-left: 0;
+    }
+
+    .page-header {
+        align-items: flex-start;
+    }
+
+    .page-header > div {
+        margin-bottom: 1rem;
+    }
+}

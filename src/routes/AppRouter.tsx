@@ -5,6 +5,9 @@ import DashboardPage from "../pages/DashboardPage";
 import NotificationsPage from "../pages/NotificationsPage";
 import SettingsPage from "../pages/SettingsPage";
 import Layout from "../components/layout/Layout";
+import ProductsPage from "../pages/ProductsPage";
+import SuppliersPage from "../pages/SuppliersPage";
+
 
 const AppRouter = () => {
     console.log("AppRouter rendering");
@@ -18,10 +21,11 @@ const AppRouter = () => {
                 {/* Rutas protegidas - Layout ya incluye ProtectedRoute */}
                 <Route element={<Layout />}>
                     <Route path="/" element={<DashboardPage />} />
+                    <Route path="/products" element={<ProductsPage />} />
+                    <Route path="/suppliers" element={<SuppliersPage />} />
                     <Route path="/notifications" element={<NotificationsPage />} />
                     <Route path="/settings" element={<SettingsPage />} />
                 </Route>
-
                 {/* Si no existe la ruta */}
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
