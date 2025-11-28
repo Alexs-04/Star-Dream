@@ -36,7 +36,6 @@ export const DashboardCharts = ({
         { name: 'Sin datos', value: 100 }
     ];
 
-    // @ts-ignore
     return (
         <div className="charts-container">
 
@@ -121,7 +120,7 @@ export const DashboardCharts = ({
                             outerRadius={80}
                             paddingAngle={2}
                             label={({ name, percent }) =>
-                                `${name} (${(percent * 100).toFixed(0)}%)`
+                                `${name} (${((percent ?? 0) * 100).toFixed(0)}%)`
                             }
                             labelLine={false}
                         >

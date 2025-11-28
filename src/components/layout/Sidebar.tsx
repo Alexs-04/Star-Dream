@@ -1,8 +1,7 @@
 // src/components/layout/Sidebar.tsx
 import "../../assets/css/Layout.css";
-// @ts-ignore
-import { Link, useNavigate } from "react-router-dom";
-import { Home, Package, Users, BarChart3, LogOut, Bolt, BellPlus, ShoppingBag } from "lucide-react";
+import { Link, NavLink } from "react-router-dom";
+import { Home, Package, Users, BarChart3, LogOut, Bolt, BellPlus, ShoppingBag, ShoppingBasket } from "lucide-react";
 import { useLogout } from "../../hooks/useLogout";
 // Versión mejorada del Sidebar con confirmación
 import { useState } from "react";
@@ -37,12 +36,15 @@ const Sidebar = () => {
                     <Link to="/sale" className="sidebar-link">
                         <ShoppingBag size={18} /> Punto de Venta
                     </Link>
+                    <Link to="/" className="sidebar-link">
+                        <ShoppingBasket size={18} /> Para entregar
+                    </Link>
                     <Link to="/products" className="sidebar-link">
                         <Package size={18} /> Productos
                     </Link>
-                    <Link to="/suppliers" className="sidebar-link">
+                    <NavLink to="/suppliers" className={({isActive}) => isActive ? "sidebar-link active" : "sidebar-link"}>
                         <Users size={18} /> Proveedores
-                    </Link>
+                    </NavLink>
                     <Link to="/reports" className="sidebar-link">
                         <BarChart3 size={18} /> Reportes
                     </Link>
